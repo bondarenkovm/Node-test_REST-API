@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-// const contacts = require("./contacts.json");
+const contacts = require("./contacts.json");
 // const moment = require("moment");
 // const fs = require("fs/promises");
 // const path = require("path");
@@ -12,7 +12,7 @@ const contactsRouter = require("./routes/api/contacts");
 
 //----------------1--------------
 // app.get("/", (reg, res) => {
-//   res.send("<h1>Nome</h1>");
+//   res.send("<h1>Home</h1>");
 // });
 // app.get("/contacts", (reg, res) => {
 //   console.log(reg.url);
@@ -62,5 +62,11 @@ app.use(cors());
 //   res.json(contacts[0]);
 // });
 app.use("/api/contacts", contactsRouter);
+
+app.use((reg, res) => {
+  res.status(404).json({
+    message: "Not found",
+  });
+});
 
 app.listen(3000);
